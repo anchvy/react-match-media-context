@@ -27,7 +27,7 @@ function useMatchMedia() {
   var _useMemo = (0, _react.useMemo)(function () {
     return Object.keys(media).reduce(function (result, key) {
       var medium = media[key];
-      var mediaQueryList = [medium.minWidth && "(min-width: ".concat(medium.minWidth, "px)"), medium.maxWidth && "(max-width: ".concat(medium.maxWidth, "px)")].filter(function (qs) {
+      var mediaQueryList = [medium.minWidth && "(min-width: ".concat(medium.minWidth, ")"), medium.maxWidth && "(max-width: ".concat(medium.maxWidth, ")")].filter(function (qs) {
         return !!qs;
       }).join(' and ');
       return _objectSpread({}, result, {

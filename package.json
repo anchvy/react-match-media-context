@@ -1,6 +1,7 @@
 {
   "name": "react-match-media-context",
-  "version": "1.0.0",
+  "version": "1.0.3",
+  "main": "dist/index.js",
   "description": "detect viewport size according to your configuration!",
   "private": false,
   "peerDependencies": {
@@ -62,6 +63,7 @@
     "width",
     "responsive",
     "react",
-    "match-media"
+    "match-media",
+    "matchmedia"
   ]
 }

@@ -1,15 +1,15 @@
 import React from 'react'
 import useMatchMedia from './useMatchMedia'
 
-const ResponsiveContext = React.createContext(null)
-export const ResponsiveProvider = ({ children, media }) => {
+const MatchMediaContext = React.createContext(null)
+export const MatchMediaProvider = ({ children, media }) => {
   const value = useMatchMedia(media)
 
   return (
-    <ResponsiveContext.Provider value={value}>
+    <MatchMediaContext.Provider value={value}>
       {children}
-    </ResponsiveContext.Provider>
+    </MatchMediaContext.Provider>
   )
 }
 
-export default ResponsiveContext
+export default MatchMediaContext

@@ -7,8 +7,8 @@ function useMatchMedia(media = []) {
         (result, key) => {
           const medium = media[key]
           const mediaQueryList = [
-            medium.minWidth && `(min-width: ${medium.minWidth}px)`,
-            medium.maxWidth && `(max-width: ${medium.maxWidth}px)`,
+            medium.minWidth && `(min-width: ${medium.minWidth})`,
+            medium.maxWidth && `(max-width: ${medium.maxWidth})`,
           ]
             .filter(qs => !!qs)
             .join(' and ')
