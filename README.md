@@ -26,7 +26,7 @@ import { MatchMediaProvider } from 'react-match-media-context'
 // custom configuration example
 // you can get { mobile, tablet, desktop, customScreen, foo, bar, ...whatever you need } from context!
 
-const queries = {
+const media = {
   bar: {
     minWidth: '250px',
     maxWidth: '450px',
