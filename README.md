@@ -1,6 +1,6 @@
 # react-match-media-context
 
-✨ Super lightweight package to handle responsive screen size as needed with React context and window.matchMedia! <Javascript>
+✨ Super lightweight package to handle responsive as needed with React context and window.matchMedia! <Javascript>
 
 
 ![giphy](https://user-images.githubusercontent.com/29141862/75099443-137ce980-5605-11ea-9e46-59ba99431027.gif)
