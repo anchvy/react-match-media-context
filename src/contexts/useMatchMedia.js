@@ -17,7 +17,7 @@ function useMatchMedia(media = []) {
             ...result,
             mediaQueries: {
               ...result.mediaQueries,
-              [key]: window.matchMedia(mediaQueryList),
+              [key]: window && window.matchMedia(mediaQueryList),
             },
             initialState: {
               ...result.initialState,

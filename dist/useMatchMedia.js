@@ -31,7 +31,7 @@ function useMatchMedia() {
         return !!qs;
       }).join(' and ');
       return _objectSpread({}, result, {
-        mediaQueries: _objectSpread({}, result.mediaQueries, _defineProperty({}, key, window.matchMedia(mediaQueryList))),
+        mediaQueries: _objectSpread({}, result.mediaQueries, _defineProperty({}, key, window && window.matchMedia(mediaQueryList))),
         initialState: _objectSpread({}, result.initialState, _defineProperty({}, key, Boolean(medium.isDefaultValue)))
       });
     }, {
