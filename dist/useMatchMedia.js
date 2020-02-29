@@ -68,7 +68,7 @@ function useMatchMedia() {
         return mediaQueries[key].removeListener(callbacks[key]);
       });
     };
-  }, [mediaQueries]);
+  }, [media]);
   return state;
 }
 

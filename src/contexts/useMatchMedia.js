@@ -60,7 +60,7 @@ function useMatchMedia(media = []) {
         mediaQueries[key].removeListener(callbacks[key])
       )
     }
-  }, [mediaQueries])
+  }, [media])
 
   return state
 }
