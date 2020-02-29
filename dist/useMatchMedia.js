@@ -7,6 +7,12 @@ exports.default = void 0;
 
 var _react = require("react");
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -15,40 +21,25 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function useMatchMedia() {
   var media = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var currentState = (0, _react.useRef)(null);
 
-  var _useMemo = (0, _react.useMemo)(function () {
-    return Object.keys(media).reduce(function (result, key) {
-      var medium = media[key];
-      var mediaQueryList = [medium.minWidth && "(min-width: ".concat(medium.minWidth, ")"), medium.maxWidth && "(max-width: ".concat(medium.maxWidth, ")")].filter(function (qs) {
-        return !!qs;
-      }).join(' and ');
-      return _objectSpread({}, result, {
-        mediaQueries: _objectSpread({}, result.mediaQueries, _defineProperty({}, key, window && window.matchMedia(mediaQueryList))),
-        initialState: _objectSpread({}, result.initialState, _defineProperty({}, key, Boolean(medium.isDefaultValue)))
-      });
-    }, {
-      mediaQueries: {},
-      initialState: {}
-    });
-  }, [media]),
-      mediaQueries = _useMemo.mediaQueries,
-      initialState = _useMemo.initialState;
-
-  var _useState = (0, _react.useState)(initialState),
+  var _useState = (0, _react.useState)(Object.keys(media).reduce(function (rs, key) {
+    return _objectSpread({}, rs, _defineProperty({}, key, Boolean(media[key].isDefaultValue)));
+  }, {})),
       _useState2 = _slicedToArray(_useState, 2),
       state = _useState2[0],
       setState = _useState2[1];
 
-  var currentState = (0, _react.useRef)(null);
   (0, _react.useEffect)(function () {
+    var mediaQueries = Object.keys(media).reduce(function (result, key) {
+      var medium = media[key];
+      var mediaQueryList = [medium.minWidth && "(min-width: ".concat(medium.minWidth, ")"), medium.maxWidth && "(max-width: ".concat(medium.maxWidth, ")")].filter(function (qs) {
+        return !!qs;
+      }).join(' and ');
+      return _objectSpread({}, result, _defineProperty({}, key, window.matchMedia(mediaQueryList)));
+    }, {});
     var mediaQueryKeys = Object.keys(mediaQueries);
 
     var update = function update(target) {

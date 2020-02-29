@@ -1,41 +1,29 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 
 function useMatchMedia(media = []) {
-  const { mediaQueries, initialState } = useMemo(
-    () =>
-      Object.keys(media).reduce(
-        (result, key) => {
-          const medium = media[key]
-          const mediaQueryList = [
-            medium.minWidth && `(min-width: ${medium.minWidth})`,
-            medium.maxWidth && `(max-width: ${medium.maxWidth})`,
-          ]
-            .filter(qs => !!qs)
-            .join(' and ')
-
-          return {
-            ...result,
-            mediaQueries: {
-              ...result.mediaQueries,
-              [key]: window && window.matchMedia(mediaQueryList),
-            },
-            initialState: {
-              ...result.initialState,
-              [key]: Boolean(medium.isDefaultValue),
-            },
-          }
-        },
-        { mediaQueries: {}, initialState: {} }
-      ),
-    [media]
-  )
-
-  const [state, setState] = useState(initialState)
   const currentState = useRef(null)
-
+  const [state, setState] = useState(Object.keys(media).reduce((rs, key) => ({ ...rs, [key]: Boolean(media[key].isDefaultValue) }), {}))
+  
   useEffect(() => {
-    const mediaQueryKeys = Object.keys(mediaQueries)
+    const mediaQueries = Object.keys(media).reduce(
+      (result, key) => {
+        const medium = media[key]
+        const mediaQueryList = [
+          medium.minWidth && `(min-width: ${medium.minWidth})`,
+          medium.maxWidth && `(max-width: ${medium.maxWidth})`,
+        ]
+          .filter(qs => !!qs)
+          .join(' and ')
 
+        return {
+          ...result,
+          [key]: window.matchMedia(mediaQueryList),
+        }
+      },
+      {}
+    )
+
+    const mediaQueryKeys = Object.keys(mediaQueries)
     const update = target => {
       const nextState = mediaQueryKeys.reduce(
         (result, key) => ({
