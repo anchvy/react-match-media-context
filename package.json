@@ -1,6 +1,6 @@
 {
   "name": "react-match-media-context",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/index.js",
   "description": "detect viewport size according to your configuration!",
   "private": false,
